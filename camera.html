@@ -1,1 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Take Picture</title>
+    <style>
+        #image-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="image-container">
+        <button id="take-picture-button">Take Picture</button>
+        <img id="image" src="" alt="Captured Image">
+    </div>
 
+    <script>
+        const takePictureButton = document.getElementById('take-picture-button');
+        const image = document.getElementById('image');
+
+        takePictureButton.addEventListener('click', () => {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    const mediaRecorder = new MediaRecorder(stream);
+                    mediaRecorder.start();
+
+                    mediaRecorder.ondataavailable = event => {
+                        const blob = new Blob([event.data], { type: 'image/jpeg' });
+                        const url = URL.createObjectURL(blob);
+                        image.src = url;
+                    };
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
