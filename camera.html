@@ -10,9 +10,24 @@
             justify-content: center;
             align-items: center;
         }
+        #video-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #video {
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
+    <div id="video-container">
+        <video id="video" autoplay></video>
+    </div>
     <div id="image-container">
         <button id="take-picture-button">Take Picture</button>
         <img id="image" src="" alt="Captured Image">
@@ -21,21 +36,26 @@
     <script>
         const takePictureButton = document.getElementById('take-picture-button');
         const image = document.getElementById('image');
+        const video = document.getElementById('video');
 
-        takePictureButton.addEventListener('click', () => {
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(stream => {
-                    const mediaRecorder = new MediaRecorder(stream);
-                    mediaRecorder.start();
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+                video.play();
 
-                    mediaRecorder.ondataavailable = event => {
-                        const blob = new Blob([event.data], { type: 'image/jpeg' });
+                takePictureButton.addEventListener('click', () => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+                    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                    canvas.toBlob(blob => {
                         const url = URL.createObjectURL(blob);
                         image.src = url;
-                    };
-                })
-                .catch(error => console.error('Error:', error));
-        });
+                    }, 'image/jpeg');
+                });
+            })
+            .catch(error => console.error('Error:', error));
     </script>
 </body>
 </html>
