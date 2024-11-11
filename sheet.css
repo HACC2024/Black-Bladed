@@ -35,3 +35,13 @@
     font-size: 30px;
     text-decoration: none;
 }
+
+.contb {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .itemb {
+    width: 100px;
+  }
+  
