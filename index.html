@@ -74,7 +74,56 @@
           
         </div>
       </div>
-
+      <head>
+        <title>Hawaiian Islands Map</title>
+        <style>
+          #map {
+            height: 600px;
+            width: 800px;
+            border: 1px solid black;
+          }
+        </style>
+      </head>
+      <body>
+        <div id="map"></div>
+        <script>
+          function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+              center: {lat: 19.8968, lng: -155.5828},
+              zoom: 7
+            });
+      
+            // Add markers for each island
+            var islands = [
+              {name: 'Oahu', lat: 21.3069, lng: -157.8583},
+              {name: 'Maui', lat: 20.7984, lng: -156.3314},
+              {name: 'Kauai', lat: 22.0583, lng: -159.4983},
+              {name: 'Hawaii', lat: 19.8968, lng: -155.5828},
+              {name: 'Lanai', lat: 20.8353, lng: -156.9264},
+              {name: 'Molokai', lat: 21.1333, lng: -157.0167},
+              {name: 'Niihau', lat: 21.8667, lng: -160.1667},
+              {name: 'Kahoolawe', lat: 20.6167, lng: -156.5833}
+            ];
+      
+            islands.forEach(function(island) {
+              var marker = new google.maps.Marker({
+                position: {lat: island.lat, lng: island.lng},
+                map: map,
+                title: island.name
+              });
+            });
+      
+            // Add event listener for marker clicks
+            google.maps.event.addListener(map, 'click', function(event) {
+              var lat = event.latLng.lat();
+              var lng = event.latLng.lng();
+              console.log('Clicked at: ' + lat + ', ' + lng);
+            });
+          }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+      </body>
+      
     </main>
 
     <!-- Bootsrap's Js links -->
