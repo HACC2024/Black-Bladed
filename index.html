@@ -33,24 +33,44 @@
           <li><a class="dropdown-item" href="friends.html"><i class="bi bi-people-fill"></i></a></li>
         </ul>
       </div>
+      
       <style>
-        #col-4{
-          display: flex;
-          justify-content: center;
-          align-items: baseline;
-        }
+        .container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.circle-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #4CAF50;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+}
       </style>
-      <!-- Camera button -->
-      <div class="float-none">
-        <div class="row mt-5">
+          <div class="container">
+            <a href="https://www.example.com">
+              <button class="circle-button"><i class="bi bi-camera-fill bi-xlg"></i></button>
+            </a>
+          </div>    
           <!-- Future addition (avatar-->
           <div class="col-4">
             <i class="bi bi-person-fill bi-xlg"></i>
           </div>
 
-          <div class="col-4">
-            <button type="button" class="btn btn-dark p-5 rounded-circle btn-lg"><a href="camera.html"><i class="bi bi-camera-fill bi-xlg"></i></a></button>    
-          </div>
+        
           
         </div>
       </div>
